@@ -18,9 +18,9 @@
     </style>
 
     <script>
-      var host = location.origin.replace(/^http/, 'ws')
+      var host = location.origin.replace(/^http/, 'ws');
       var ws = new WebSocket(host);
-      var display = document.getElementById("display")
+      var display = document.getElementById("display");
 
       ws.onopen = function (event) {
         //alert("Socket connected succesfully!!!")
