@@ -1,7 +1,18 @@
-# Node.js Socket.io Example
+# Node.js Websocket Test
 
-This example accompanies the
-[Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
-tutorial.
+A tiny demo using the [einaros/ws](http://einaros.github.io/ws/) WebSockets implementation.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+# Running Locally
+
+``` bash
+npm install
+npm start
+```
+
+# Running on Heroku
+
+``` bash
+heroku create
+git push heroku master
+heroku open
+```
