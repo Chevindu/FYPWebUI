@@ -20,14 +20,48 @@
     <script>
       var host = location.origin.replace(/^http/, 'ws')
       var ws = new WebSocket(host);
+      var display = document.getElementById("display")
+
+      ws.onopen = function (event) {
+        //alert("Socket connected succesfully!!!")
+        setTimeout(function() { ws.send('connection succeeded'); } , 1000);
+        display.innerHTML+="connection succeeded <br />";
+      };
+
       ws.onmessage = function (event) {
         var li = document.createElement('li');
         li.innerHTML = JSON.parse(event.data);
         document.querySelector('#pings').appendChild(li);
       };
+
+      function myFunction(event) {
+        //ws.send("Hello");
+        if(event.keyCode == 13) {     //when enter is pressed...
+          var text = document.getElementById('eingabe').value;    //assign value of the entered string to te text variable
+          if(text != "") {     //if text is not an empty string
+            //display.innerHTML+="From Client: "+text+"<br />"; //show the message from client in div
+            ws.send(text);    //send string to server
+            display.innerHTML += "<strong>Me: </strong>" + text + "<br />";       //display input text in div (client side)
+            document.getElementById('eingabe').value = "";     //and clear the input field
+          }
+          else {
+            console.log("empty string not sent")
+          }
+        }
+      }
+
+      function clearlog() {
+        display.innerHTML = "";
+      }
     </script>
   </head>
   <body>
+      <input style="width: 800px;height: 200px" type="text" placeholder="Enter text here to send to server" id="eingabe" onkeypress="myFunction(event)"/>
+
+      <button onclick="clearlog()">Clear Logs</button>
+      
+      <div style="overflow:scroll; width: 800px; height: 550px; border: solid; border-radius: 9px" id="display"></div>
+
     <h1>Pings</h1>
     <ul id='pings'></ul>
   </body>
