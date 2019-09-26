@@ -25,7 +25,7 @@
       ws.onopen = function (event) {
         //alert("Socket connected succesfully!!!")
         setTimeout(function() { ws.send('connection succeeded'); } , 1000);
-        display.innerHTML+="connection succeeded <br />";
+        display.innerHTML = "connection succeeded <br />";
       };
 
       ws.onmessage = function (event) {
@@ -60,7 +60,7 @@
 
       <button onclick="clearlog()">Clear Logs</button>
       
-      <div style="overflow:scroll; width: 800px; height: 550px; border: solid; border-radius: 9px" id="display"></div>
+      <div style="overflow:scroll; width: 800px; height: 550px; border: solid; border-radius: 9px" id="display"><h3>Display</h3><br /></div>
 
     <h1>Pings</h1>
     <ul id='pings'></ul>
