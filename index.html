@@ -6,16 +6,6 @@
       font-family: "Helvetica Neue", helvetica, arial;
       padding: 15px;
     }
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    ul li {
-      line-height: 1.4;
-    }
   </style>
 
 </head>
@@ -46,9 +36,13 @@
     };
 
     ws.onmessage = function (event) {
-      var li = document.createElement('li');
+
+      ws.send(document.getElementById('eingabe').value);
+
+      /*var li = document.createElement('li');
       li.innerHTML = JSON.parse(event.data);
-      document.querySelector('#pings').appendChild(li);
+      document.querySelector('#pings').appendChild(li);*/
+
     };
 
     function myFunction(event) {
@@ -58,6 +52,7 @@
         if (text != "") {     //if text is not an empty string
           //display.innerHTML+="From Client: "+text+"<br />"; //show the message from client in div
           ws.send(text);    //send string to server
+          console.log("Input: " + text);
           display.innerHTML += "<strong>Me: </strong>" + text + "<br />";       //display input text in div (client side)
           document.getElementById('eingabe').value = "";     //and clear the input field
         }
