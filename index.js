@@ -2,30 +2,26 @@ var WebSocketServer = require("ws").Server
 var http = require("http")
 var express = require("express")
 var app = express()
-var port = process.env.PORT || 7788
+var port = 7788
 var WEB_BROWSER = 'web_browser';
 var ROBOT = 'robot';
 var INIT_MESSAGE = 'init_message';
 var web_browser_socket;
 var robot_socket;
 
-app.use(express.static(__dirname + "/"))
+app.use(express.static(__dirname + "/"));
 
-var server = http.createServer(app)
-server.listen(port)
+var server = http.createServer(app);
+server.listen(port);
 
-console.log("http server listening on %d", port)
+console.log("HTTP server listening on %d", port);
 
-var wss = new WebSocketServer({server: server})
-console.log("websocket server created")
+var wss = new WebSocketServer({server: server});
+console.log("Websocket server created");
 
 wss.on("connection", function(ws) {
 	// console.log(ws);
-	console.log("Client connected to WS server");
-  
-	// var id = setInterval(function() {
-    // 	ws.send(JSON.stringify(new Date()), function() {  })
-	// }, 1000);
+	console.log("A client connected to websocket server");
 
   ws.on("message", function incoming(data) {
 	console.log('json object', data);
@@ -50,10 +46,9 @@ wss.on("connection", function(ws) {
 	}
   });
 
-  console.log("websocket connection open")
+  console.log("Websocket connection is opened");
 
   ws.on("close", function() {
-    console.log("websocket connection close")
-    // clearInterval(id)
+    console.log("Websocket connection is closed");
   })
 })

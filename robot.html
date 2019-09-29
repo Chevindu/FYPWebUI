@@ -19,7 +19,7 @@
 
 <body>
   <input style="width: 50%;height: 3em; border: 2px solid green; border-radius: 4px; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" 
-  type="text" placeholder="Enter text here to send to server" id="eingabe" onkeypress="myFunction(event)" />
+  type="text" placeholder="Enter text here to send to server" id="chat_msg" onkeypress="myFunction(event)" />
 
   <button class="clear" onclick="clearlog()">Clear Logs</button>
 
@@ -36,36 +36,29 @@
     var display = document.getElementById("display");
 
     ws.onopen = function (event) {
-      //alert("Socket connected succesfully!!!")
       // ws.send("Host address: " + host);
       message = {from: 'robot', body: 'init_message'};
       ws.send(JSON.stringify(message));
-      // setTimeout(function () { ws.send('connection succeeded'); }, 1000);
       display.innerHTML = "Socket connected succesfully!!! <br />";
     };
 
     ws.onmessage = function (event) {
       console.log("event.data value: ", event.data);
       display.innerHTML += "<strong>Web browser: </strong>" + event.data + "<br />";       //display input text in div (client side)
-      // ws.send(document.getElementById('eingabe').value);
-
-      /*var li = document.createElement('li');
-      li.innerHTML = JSON.parse(event.data);
-      document.querySelector('#pings').appendChild(li);*/
+      // ws.send(document.getElementById('chat_msg').value);
 
     };
 
     function myFunction(event) {
       //ws.send("Hello");
       if (event.which == 13 || event.keyCode == 13) {     //when enter is pressed...
-        var text = document.getElementById('eingabe').value;    //assign value of the entered string to te text variable
+        var text = document.getElementById('chat_msg').value;
         var message = {from: 'robot', body: text};
-        if (text != "") {     //if text is not an empty string
-          //display.innerHTML+="From Client: "+text+"<br />"; //show the message from client in div
+        if (text != "") {
           ws.send(JSON.stringify(message));    //send string to server
           console.log("Input: " + text);
           display.innerHTML += "<strong>Me: </strong>" + text + "<br />";       //display input text in div (client side)
-          document.getElementById('eingabe').value = "";     //and clear the input field
+          document.getElementById('chat_msg').value = "";     //and clear the input field
         }
         else {
           console.log("empty string not sent")
