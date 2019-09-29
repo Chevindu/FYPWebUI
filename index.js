@@ -2,7 +2,7 @@ var WebSocketServer = require("ws").Server
 var http = require("http")
 var express = require("express")
 var app = express()
-var port = process.env.PORT || 80
+var port = 80
 
 app.use(express.static(__dirname + "/"))
 
@@ -15,6 +15,8 @@ var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
 wss.on("connection", function(ws) {
+  console.log("Client connected to WS server");
+
   var id = setInterval(function() {
     ws.send(JSON.stringify(new Date()), function() {  })
   }, 1000)
