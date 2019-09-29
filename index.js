@@ -2,7 +2,7 @@ var WebSocketServer = require("ws").Server
 var http = require("http")
 var express = require("express")
 var app = express()
-var port = process.env.PORT || 80
+var port = process.env.PORT || 7788
 
 app.use(express.static(__dirname + "/"))
 
@@ -20,6 +20,10 @@ wss.on("connection", function(ws) {
   var id = setInterval(function() {
     ws.send(JSON.stringify(new Date()), function() {  })
   }, 1000)
+
+  ws.on("message", function incoming(data) {
+    console.log(data);
+  });
 
   console.log("websocket connection open")
 
