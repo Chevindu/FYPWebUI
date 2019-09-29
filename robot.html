@@ -30,16 +30,17 @@
     var display = document.getElementById("display");
 
     ws.onopen = function (event) {
-      console.log("Host address: " + host);
-      message = {from: 'web_browser', body: 'init_message'};
+      //alert("Socket connected succesfully!!!")
+      // ws.send("Host address: " + host);
+      message = {from: 'robot', body: 'init_message'};
       ws.send(JSON.stringify(message));
-      
-      display.innerHTML = "Socket connected succesfully!!! <br />";
+      // setTimeout(function () { ws.send('connection succeeded'); }, 1000);
+      display.innerHTML = "connection succeeded <br />";
     };
 
     ws.onmessage = function (event) {
       console.log("event.data value: ", event.data);
-      display.innerHTML += "<strong>Robot: </strong>" + event.data + "<br />";       //display input text in div (client side)
+      display.innerHTML += "<strong>Web browser: </strong>" + event.data + "<br />";       //display input text in div (client side)
       // ws.send(document.getElementById('eingabe').value);
 
       /*var li = document.createElement('li');
@@ -52,8 +53,8 @@
       //ws.send("Hello");
       if (event.which == 13 || event.keyCode == 13) {     //when enter is pressed...
         var text = document.getElementById('eingabe').value;    //assign value of the entered string to te text variable
-        var message = {from: 'web_browser', body: text};
-        if (text !== "") {     //if text is not an empty string
+        var message = {from: 'robot', body: text};
+        if (text != "") {     //if text is not an empty string
           //display.innerHTML+="From Client: "+text+"<br />"; //show the message from client in div
           ws.send(JSON.stringify(message));    //send string to server
           console.log("Input: " + text);
