@@ -6,22 +6,28 @@
       font-family: "Helvetica Neue", helvetica, arial;
       padding: 15px;
     }
+    .clear {
+      padding: 12px 32px;
+      text-decoration: none;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+      }
   </style>
 
 </head>
 
 <body>
-  <input style="width: 50%;height: 20px" type="text" placeholder="Enter text here to send to server" id="eingabe"
-    onkeypress="myFunction(event)" />
+  <input style="width: 50%;height: 3em; border: 2px solid green; border-radius: 4px; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" 
+  type="text" placeholder="Enter text here to send to server" id="eingabe" onkeypress="myFunction(event)" />
 
-  <button onclick="clearlog()">Clear Logs</button>
+  <button class="clear" onclick="clearlog()">Clear Logs</button>
 
-  <div style="overflow:scroll; width: 50%; height: 300px; border: solid; border-radius: 9px" id="display">
-    <h3>Display</h3><br />
-  </div>
+  <p>Type the message above and hit enter.</p>
 
-  <h1>Pings</h1>
-  <ul id='pings'></ul>
+  <div style="overflow:scroll; width: 50%; height: 300px; border: solid; border-radius: 9px; padding: 1em; margin-top: 1em" id="display"></div>
+
+  <div style="margin:1em; float:left"><a href="/" target="_blank"><strong>Open the Server in new tab</strong></a></div>
 
   <script>
 
@@ -35,7 +41,7 @@
       message = {from: 'robot', body: 'init_message'};
       ws.send(JSON.stringify(message));
       // setTimeout(function () { ws.send('connection succeeded'); }, 1000);
-      display.innerHTML = "connection succeeded <br />";
+      display.innerHTML = "Socket connected succesfully!!! <br />";
     };
 
     ws.onmessage = function (event) {
