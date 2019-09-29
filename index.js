@@ -49,6 +49,8 @@ wss.on("connection", function(ws) {
   console.log("Websocket connection is opened");
 
   ws.on("close", function(code, reason) {
-    console.log("Websocket connection is closed", code, reason);
+	console.log("Websocket connection is closed");
+	console.log("Code: ", code);
+	console.log("Reason: ", reason);
   })
 })
