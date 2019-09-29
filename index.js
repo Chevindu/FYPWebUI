@@ -15,6 +15,7 @@ var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
 wss.on("connection", function(ws) {
+  console.log(ws);
   console.log("Client connected to WS server");
   
   var id = setInterval(function() {
@@ -22,6 +23,10 @@ wss.on("connection", function(ws) {
   }, 1000)
 
   ws.on("message", function incoming(data) {
+    // message = JSON.parse(data);
+    //  if (message.from === 'web browser') {
+       
+    //  }
     console.log(data);
   });
 
